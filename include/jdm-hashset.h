@@ -15,7 +15,7 @@ typedef struct jdm_hashset_config_t jdm_hashset_config_t;
 typedef void (*jdm_hashset_foreach_func_t)(const u8* elem);
 
 
-jdm_hashset_t* jdm_hashset_create(const jdm_hashset_config_t* hs);
+jdm_hashset_t* jdm_hashset_create(const jdm_hashset_config_t* cfg);
 void jdm_hashset_destroy(jdm_hashset_t* set);
 jdm_hashset_status_t jdm_hashset_add(jdm_hashset_t* set, u8* elem);
 jdm_hashset_status_t jdm_hashset_remove(jdm_hashset_t* set, u8* elem);
