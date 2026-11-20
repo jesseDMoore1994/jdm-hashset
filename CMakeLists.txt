@@ -6,7 +6,7 @@ project(jdm-hashset VERSION 1.0 LANGUAGES C)
 # Set the C standard to C11
 set(CMAKE_C_STANDARD 11)
 
-set(CMAKE_REQUIRED_LIBRARIES jdm-alloc jdm-log)
+set(CMAKE_REQUIRED_LIBRARIES jdm-alloc jdm-array jdm-hashmap jdm-log)
 
 option(ENABLE_ASAN "Enable Address Sanitizer" OFF)
 
@@ -49,7 +49,7 @@ add_library(jdm-hashset STATIC ${SOURCES})
 target_include_directories(jdm-hashset PUBLIC include)
 
 # Link the jdm-log library to the jdm-alloc library
-target_link_libraries(jdm-hashset PRIVATE jdm-log)
+target_link_libraries(jdm-hashset PRIVATE jdm-hashmap jdm-array jdm-alloc jdm-log)
 
 # Add the test executables
 add_executable(test-jdm-hashset tests/test-jdm-hashset.c)
