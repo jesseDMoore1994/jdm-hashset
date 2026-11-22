@@ -93,16 +93,12 @@ static b8 test_jdm_hashset_iterator(void) {
 
   jdm_hashset_iterator_t it = jdm_hashset_iterator_create(set);
   jdm_hashset_status_t s;
-  char **elem = JDM_NULL;
-  s = jdm_hashset_iterator_next(it, (u8**)&elem);
-  JDM_LOG_INFO("status %d, elem '%s'", s, *elem);
-  s = jdm_hashset_iterator_next(it, (u8**)&elem);
-  JDM_LOG_INFO("status %d, elem '%s'", s, *elem);
-  s = jdm_hashset_iterator_next(it, (u8**)&elem);
-  JDM_LOG_INFO("status %d, elem '%s'", s, *elem);
-  s = jdm_hashset_iterator_next(it, (u8**)&elem);
-  JDM_LOG_INFO("status %d, elem '%s'", s, *elem);
-
+  char *elem = JDM_NULL;
+  s = jdm_hashset_iterator_next(&it, (u8**)&elem);
+  s = jdm_hashset_iterator_remove(&it);
+  s = jdm_hashset_iterator_next(&it, (u8**)&elem);
+  s = jdm_hashset_iterator_next(&it, (u8**)&elem);
+  //
   if(jdm_hashset_size(set) != 2) {
     JDM_LOG_ERROR("set should have two elements");
     destroy_test_ctx(ctx);
@@ -126,6 +122,10 @@ int main() {
   }
   if (test_jdm_hashset_element_ops() != JDM_TRUE) {
     JDM_LOG_ERROR("test_jdm_hashset_element_ops failed...");
+    return 1;
+  }
+  if (test_jdm_hashset_iterator() != JDM_TRUE) {
+    JDM_LOG_ERROR("test_jdm_hashset_iterator failed...");
     return 1;
   }
   jdm_log_cleanup();

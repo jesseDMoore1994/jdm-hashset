@@ -25,8 +25,9 @@ typedef struct {
 } jdm_hashset_iterator_t;
 
 jdm_hashset_iterator_t jdm_hashset_iterator_create(jdm_hashset_t *set);
-jdm_hashset_status_t jdm_hashset_iterator_next(jdm_hashset_iterator_t it,
+jdm_hashset_status_t jdm_hashset_iterator_next(jdm_hashset_iterator_t *it,
                                                u8 **out);
-jdm_hashset_status_t jdm_hashset_iterator_remove(jdm_hashset_iterator_t it);
+jdm_hashset_status_t jdm_hashset_iterator_remove(jdm_hashset_iterator_t *it);
+void jdm_hashset_iterator_reset(jdm_hashset_iterator_t *it);
 
 #endif // JDM_HASHSET_H

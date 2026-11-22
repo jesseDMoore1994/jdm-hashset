@@ -70,10 +70,10 @@ jdm_hashset_iterator_t jdm_hashset_iterator_create(jdm_hashset_t *set) {
   };
 }
 
-jdm_hashset_status_t jdm_hashset_iterator_next(jdm_hashset_iterator_t it,
+jdm_hashset_status_t jdm_hashset_iterator_next(jdm_hashset_iterator_t *it,
                                                u8 **out) {
   jdm_hashmap_entry_t* e;
-  jdm_hashset_status_t s = jdm_hashmap_iterator_next(it.it, &e);
+  jdm_hashset_status_t s = jdm_hashmap_iterator_next(&(it->it), &e);
   if(s != JDM_HASHMAP_OK) {
     return s;
   }
@@ -83,6 +83,10 @@ jdm_hashset_status_t jdm_hashset_iterator_next(jdm_hashset_iterator_t it,
   return JDM_HASHMAP_OK;
 }
 
-jdm_hashset_status_t jdm_hashset_iterator_remove(jdm_hashset_iterator_t it) {
-  return jdm_hashmap_iterator_remove(it.it, NULL);
+jdm_hashset_status_t jdm_hashset_iterator_remove(jdm_hashset_iterator_t *it) {
+  return jdm_hashmap_iterator_remove(&(it->it), NULL);
+}
+
+void jdm_hashset_iterator_reset(jdm_hashset_iterator_t *it) {
+  jdm_hashmap_iterator_reset(&(it->it));
 }
